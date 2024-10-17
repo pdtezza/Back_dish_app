@@ -31,10 +31,17 @@ public class DishController {
         return dishService.create(dish);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/atualizarPrato")
     public Dish updateDish(@PathVariable Long id, @RequestBody Dish dish) {
         return dishService.update(id, dish);
     }
+
+    @PutMapping("/{id}/diminuirQuantidade")
+    public Dish diminuirQuantidadeDish(@PathVariable Long id, @RequestParam int value) {return dishService.diminuirQuantidade(id, value);}
+
+    @PutMapping("/{id}/aumentarQuantidade")
+    public Dish aumentarQuantidadeDish(@PathVariable Long id, @RequestParam int value) {return dishService.aumentarQuantidade(id, value);}
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDish(@PathVariable Long id) {

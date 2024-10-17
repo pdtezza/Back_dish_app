@@ -37,4 +37,29 @@ public class DishService {
         Dish dish = findById(id);
         dishRepository.delete(dish);
     }
+
+    public Dish diminuirQuantidade(Long id, int valor) {
+        Dish dish = findById(id);
+        if (dish.getQuantity() - valor < 0) {
+            throw new RuntimeException("Quantidade insuficiente");
+        }
+        dish.setQuantity(dish.getQuantity() - valor);
+        if (dish.getQuantity() <= 0) {
+            dish.setStock(false);
+        }
+        return dishRepository.save(dish);
+    }
+
+    public Dish aumentarQuantidade(Long id, int valor) {
+        if (valor <= 0){
+            throw new RuntimeException("Quantidade inválida");
+        }
+        Dish dish = findById(id);
+        dish.setQuantity(dish.getQuantity() + valor);
+        if (dish.getQuantity() > 0) {
+            dish.setStock(true);
+        }
+        return dishRepository.save(dish);
+    }
+
 }
