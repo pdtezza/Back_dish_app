@@ -21,4 +21,10 @@ public class Dish {
     private String category;
 
     private String image;
+
+    private boolean stock;
+
+    private int quantity;
+
+
 }
