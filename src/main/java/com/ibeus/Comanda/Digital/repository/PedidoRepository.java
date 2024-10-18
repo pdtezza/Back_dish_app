@@ -4,5 +4,5 @@ import com.ibeus.Comanda.Digital.model.Dish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.ibeus.Comanda.Digital.model.Pedido;
 
-public interface PedidoRepository extends JpaRepository<Dish, Long>{
+public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 }

@@ -18,5 +18,5 @@ public class Pedido {
 
     private String data;
 
-    private List<String> price;
+    private List<Dish> itens;
 }
