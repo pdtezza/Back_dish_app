@@ -1,4 +1,7 @@
 package com.ibeus.Comanda.Digital.repository;
 
-public interface ItemPedidoRepository {
+import com.ibeus.Comanda.Digital.model.ItemPedido;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
 }
