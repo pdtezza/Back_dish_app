@@ -22,5 +22,9 @@ public class Dish {
 
     private String image;
 
+    private boolean stock;
+
+    private int quantity;
+
 
 }
