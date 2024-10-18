@@ -21,6 +21,4 @@ public class Dish {
     private String category;
 
     private String image;
-
-
 }
