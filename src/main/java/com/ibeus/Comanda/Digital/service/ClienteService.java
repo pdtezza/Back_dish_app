@@ -44,7 +44,7 @@ public class ClienteService {
         }
     }
 
-    // Avançar status do pedido (restaurante)
+    
     public String avancarStatusPedido(Long pedidoId) {
         Pedido pedido = pedidosSimulados.get(pedidoId);
         if (pedido != null && !pedido.isFinalizado()) {
@@ -57,7 +57,7 @@ public class ClienteService {
         }
     }
 
-    // Retroceder status do pedido (restaurante)
+    
     public String retrocederStatusPedido(Long pedidoId) {
         Pedido pedido = pedidosSimulados.get(pedidoId);
         if (pedido != null && !pedido.isRecebido()) {
@@ -70,7 +70,7 @@ public class ClienteService {
         }
     }
 
-    // Listar todos os pedidos simulados (para fins de teste)
+    
     public Map<Long, Pedido> listarPedidosSimulados() {
         return pedidosSimulados;
     }
