@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class ItemPedido {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

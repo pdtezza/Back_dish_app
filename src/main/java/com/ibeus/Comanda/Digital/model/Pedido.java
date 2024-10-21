@@ -21,6 +21,12 @@ public class Pedido {
 
     private String data;
 
-/*    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ItemPedido> itens = new ArrayList<>();*/
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ItemPedido> itens = new ArrayList<>();
+
+
+    public void addItem(ItemPedido item) {
+        this.itens.add(item);
+    }
+
 }

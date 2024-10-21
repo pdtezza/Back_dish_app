@@ -40,45 +40,11 @@ public class PedidoService {
         pedidoRepository.delete(pedido);
     }
 
-//    public Pedido addItem(Long idpedido, Long idprato, int quantidade) {
-//        Pedido pedido = findById(idpedido);
-//        Dish dish = findByIdDish(idprato);
-//
-//        boolean pratoJaAdicionado = false;
-//        for (ItemPedido item : pedido.getItens()) {
-//            if (item.getDish().getId().equals(dish.getId())) {
-//                item.setQuantidade(item.getQuantidade() + quantidade);
-//                pratoJaAdicionado = true;
-//                break;
-//            }
-//        }
-//
-//        if (!pratoJaAdicionado) {
-//            ItemPedido item = new ItemPedido();
-//            item.setPedido(pedido);
-//            item.setDish(dish);
-//            item.setQuantidade(quantidade);
-//
-//            pedido.getItens().add(item);
-//        }
-//
-//        return pedidoRepository.save(pedido);
-//    }
-
-/*    public Pedido deletarItem(Long idpedido, String item){
-
-        Pedido pedido = findById(idpedido);
-        ArrayList<Dish> listaPratos = new ArrayList<>();
-        listaPratos = pedido.getItens();
-
-        for (Dish prato: listaPratos){
-            if (prato.getName() == item){
-                listaPratos.remove(item);
-                break;
-            }
-        }
-        return pedidoRepository.save(pedido);
-    }*/
+  public Pedido addItem(Long idpedido, Long idprato, int quantidade) {
+        Dish dish = dishRepository.findById(idprato).orElseThrow();
+        Pedido pedido = pedidoRepository.findById(idpedido).orElseThrow();
+        ItemPedido item = new ItemPedido(dish,quantidade);
+        pedido.addItem(item);
 
 
-}
+}}
