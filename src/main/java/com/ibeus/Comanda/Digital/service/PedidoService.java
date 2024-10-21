@@ -35,6 +35,11 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
+    public void delete(Long id) {
+        Pedido pedido = findById(id);
+        pedidoRepository.delete(pedido);
+    }
+
 //    public Pedido addItem(Long idpedido, Long idprato, int quantidade) {
 //        Pedido pedido = findById(idpedido);
 //        Dish dish = findByIdDish(idprato);
