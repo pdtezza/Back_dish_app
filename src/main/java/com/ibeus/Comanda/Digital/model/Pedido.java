@@ -2,7 +2,10 @@ package com.ibeus.Comanda.Digital.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,5 +21,6 @@ public class Pedido {
 
     private String data;
 
-    private List<Dish> itens;
+/*    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ItemPedido> itens = new ArrayList<>();*/
 }

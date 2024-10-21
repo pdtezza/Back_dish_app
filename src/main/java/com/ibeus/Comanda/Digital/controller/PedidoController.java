@@ -4,7 +4,10 @@ import com.ibeus.Comanda.Digital.model.Dish;
 import com.ibeus.Comanda.Digital.model.Pedido;
 import com.ibeus.Comanda.Digital.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -14,6 +17,12 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
+    @GetMapping
+    public List<Pedido> getAllPedidos(){ return pedidoService.findAll();}
+
+    @PostMapping
+    public Pedido criarPedido(@RequestBody Pedido pedido){ return pedidoService.criarPedido(pedido);}
+
     @PutMapping("/{id}/adicionarItemPedido")
-    public Pedido adicionarItem(@PathVariable Long id,@RequestBody Dish prato){ return pedidoService.additem(id,prato); }
+    public Pedido adicionarItem(@PathVariable Long id, @RequestParam Long idprato, @RequestParam int qtd){ return pedidoService.addItem(id,idprato, qtd); }
 }
