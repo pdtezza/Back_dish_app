@@ -21,7 +21,7 @@ public class ItemPedido {
     private Dish dish;
 
     private int quantidade;
-
+    public ItemPedido() {}
     public ItemPedido(Dish dish, int quantidade) {
         this.dish = dish;
         this.quantidade = quantidade;
