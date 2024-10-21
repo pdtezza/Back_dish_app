@@ -24,8 +24,7 @@ public class ItemPedido {
 
     private int quantidade;
 
-    ItemPedido(Dish dish, int quantidade) {
-        this.pedido = pedido;
+    public ItemPedido(Dish dish, int quantidade) {
         this.dish = dish;
         this.quantidade = quantidade;
     }
