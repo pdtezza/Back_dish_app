@@ -8,8 +8,6 @@ import lombok.Data;
 @Data
 public class ItemPedido {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +21,7 @@ public class ItemPedido {
     private Dish dish;
 
     private int quantidade;
-
+    public ItemPedido() {}
     public ItemPedido(Dish dish, int quantidade) {
         this.dish = dish;
         this.quantidade = quantidade;

@@ -43,8 +43,8 @@ public class PedidoService {
   public Pedido addItem(Long idpedido, Long idprato, int quantidade) {
         Dish dish = dishRepository.findById(idprato).orElseThrow();
         Pedido pedido = pedidoRepository.findById(idpedido).orElseThrow();
-        ItemPedido item = new ItemPedido(dish,quantidade);
+        ItemPedido item = new ItemPedido(dish, quantidade);
         pedido.addItem(item);
 
-
+        return pedidoRepository.save(pedido);
 }}

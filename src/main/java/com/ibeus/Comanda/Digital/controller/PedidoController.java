@@ -24,8 +24,8 @@ public class PedidoController {
     @PostMapping
     public Pedido criarPedido(@RequestBody Pedido pedido){ return pedidoService.criarPedido(pedido);}
 
-    @PutMapping("/{id}/adicionarItemPedido")
-    public Pedido adicionarItem(@PathVariable Long id, @RequestParam Long idprato, @RequestParam int qtd){ return pedidoService.addItem(id,idprato, qtd); }
+    @PutMapping("/{id}/{idprato}/{qtd}/adicionarItemPedido")
+    public Pedido adicionarItem(@PathVariable Long id, @PathVariable Long idprato, @PathVariable int qtd){ return pedidoService.addItem(id,idprato, qtd); }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> apagarPedido(@PathVariable Long id) {

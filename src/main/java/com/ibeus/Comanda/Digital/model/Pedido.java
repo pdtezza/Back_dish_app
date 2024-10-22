@@ -21,11 +21,11 @@ public class Pedido {
 
     private String data;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemPedido> itens = new ArrayList<>();
 
-
     public void addItem(ItemPedido item) {
+        item.setPedido(this);
         this.itens.add(item);
     }
 
