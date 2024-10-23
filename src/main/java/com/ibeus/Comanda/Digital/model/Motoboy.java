@@ -7,14 +7,13 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "motoboy")
 @Data
-public class Cliente {
+public class Motoboy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
     private String nome;
     private String endereco;
     private String cpf;
-
 }
