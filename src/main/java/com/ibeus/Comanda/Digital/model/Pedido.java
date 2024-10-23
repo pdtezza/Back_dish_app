@@ -2,15 +2,18 @@ package com.ibeus.Comanda.Digital.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pedidos")
 @Data
+@EqualsAndHashCode(exclude = {"itens"})
 public class Pedido {
 
     @Id
@@ -21,12 +24,14 @@ public class Pedido {
 
     private String data;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ItemPedido> itens = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_pratos",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "prato_id")
+    )
+    private List<Dish> dish;
 
-    public void addItem(ItemPedido item) {
-        item.setPedido(this);
-        this.itens.add(item);
-    }
+    private double precoTotal;
 
 }
