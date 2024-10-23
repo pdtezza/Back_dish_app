@@ -2,10 +2,11 @@ package com.ibeus.Comanda.Digital.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "itempedido")
 @Data
+@EqualsAndHashCode(exclude = {"itens"})
 public class ItemPedido {
 
     @Id
@@ -22,6 +23,7 @@ public class ItemPedido {
 
     private int quantidade;
 
+    public ItemPedido() {}
     public ItemPedido(Dish dish, int quantidade) {
         this.dish = dish;
         this.quantidade = quantidade;
