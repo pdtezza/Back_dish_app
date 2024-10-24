@@ -1,7 +1,6 @@
 package com.ibeus.Comanda.Digital.service;
 
 import com.ibeus.Comanda.Digital.model.Dish;
-import com.ibeus.Comanda.Digital.model.ItemPedido;
 import com.ibeus.Comanda.Digital.model.Pedido;
 import com.ibeus.Comanda.Digital.repository.DishRepository;
 import com.ibeus.Comanda.Digital.repository.ItemPedidoRepository;
@@ -19,9 +18,6 @@ public class PedidoService {
 
     @Autowired
     private DishRepository dishRepository;
-
-    @Autowired
-    private ItemPedidoRepository itemPedidoRepository;
 
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
