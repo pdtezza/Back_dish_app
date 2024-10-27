@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,16 +34,16 @@ public class ClienteController {
     public String acompanharPedido(@PathVariable Long pedidoId) {
         return clienteService.acompanharPedido(pedidoId);
     }
-    @PutMapping("/avancar-status/{pedidoId}")
-    public String avancarStatusPedido(@PathVariable Long pedidoId) {
-        return clienteService.avancarStatusPedido(pedidoId);
-    }
+    // @PutMapping("/avancar-status/{pedidoId}")
+    // public String avancarStatusPedido(@PathVariable Long pedidoId) {
+    //     return clienteService.avancarStatusPedido(pedidoId);
+    // }
 
     
-    @PutMapping("/retroceder-status/{pedidoId}")
-    public String retrocederStatusPedido(@PathVariable Long pedidoId) {
-        return clienteService.retrocederStatusPedido(pedidoId);
-    }
+    // @PutMapping("/retroceder-status/{pedidoId}")
+    // public String retrocederStatusPedido(@PathVariable Long pedidoId) {
+    //     return clienteService.retrocederStatusPedido(pedidoId);
+    // }
 
    
 }

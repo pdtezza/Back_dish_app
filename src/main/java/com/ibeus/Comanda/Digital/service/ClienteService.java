@@ -1,19 +1,24 @@
 package com.ibeus.Comanda.Digital.service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ibeus.Comanda.Digital.model.Cliente;
+import com.ibeus.Comanda.Digital.model.Dish;
+import com.ibeus.Comanda.Digital.model.Pedido;
 import com.ibeus.Comanda.Digital.repository.ClienteRepository;
+import com.ibeus.Comanda.Digital.repository.PedidoRepository;
 
 @Service
 public class ClienteService {  
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
 
     public Cliente criarCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
@@ -25,39 +30,23 @@ public class ClienteService {
     }
 
 
+    
     public String acompanharPedido(Long pedidoId) {
-        Pedido pedido = .get(pedidoId);
-        if (pedido != null) {
-            return "Pedido " + pedidoId + ": " + pedido.getDescricao() + ", Status: " + pedido.getStatus();
-        } else {
-            return "Pedido não encontrado.";
+        Pedido pedido = pedidoRepository.findById(pedidoId)
+            .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+    
+        StringBuilder detalhesPedido = new StringBuilder("Status do pedido: " + pedido.getStatus() + "\nDetalhes do pedido:\n");
+    
+        
+        for (Dish dish : pedido.getDish()) {
+            detalhesPedido.append("Nome: ").append(dish.getName())
+                .append(", Preço: ").append(dish.getPrice())
+                .append(", Descrição: ").append(dish.getDescription())
+                .append("\n");
         }
+    
+        return detalhesPedido.toString();
     }
 
-    
-    public String avancarStatusPedido(Long pedidoId) {
-        Pedido pedido = .get(pedidoId);
-        if (pedido != null && !pedido.isFinalizado()) {
-            pedido.avancarStatus();
-            return "Status do pedido " + pedidoId + " atualizado para: " + pedido.getStatus();
-        } else if (pedido.isFinalizado()) {
-            return "O pedido já foi entregue.";
-        } else {
-            return "Pedido não encontrado.";
-        }
-    }
-
-    
-    public String retrocederStatusPedido(Long pedidoId) {
-        Pedido pedido = .get(pedidoId);
-        if (pedido != null && !pedido.isRecebido()) {
-            pedido.retrocederStatus();
-            return "Status do pedido " + pedidoId + " atualizado para: " + pedido.getStatus();
-        } else if (pedido.isRecebido()) {
-            return "O pedido está no status inicial e não pode ser retrocedido.";
-        } else {
-            return "Pedido não encontrado.";
-        }
-    }
 
  }

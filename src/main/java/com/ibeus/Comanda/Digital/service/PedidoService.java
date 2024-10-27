@@ -1,10 +1,9 @@
 package com.ibeus.Comanda.Digital.service;
 
 import com.ibeus.Comanda.Digital.model.Dish;
-import com.ibeus.Comanda.Digital.model.ItemPedido;
 import com.ibeus.Comanda.Digital.model.Pedido;
 import com.ibeus.Comanda.Digital.repository.DishRepository;
-import com.ibeus.Comanda.Digital.repository.ItemPedidoRepository;
+
 import com.ibeus.Comanda.Digital.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,8 @@ public class PedidoService {
     @Autowired
     private DishRepository dishRepository;
 
-    @Autowired
-    private ItemPedidoRepository itemPedidoRepository;
+    // @Autowired
+    // private ItemPedidoRepository itemPedidoRepository;
 
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
