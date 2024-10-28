@@ -20,7 +20,7 @@ public class DishService {
     public Dish findById(Long id) {
         return dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found"));
     }
-
+ 
     public Dish create(Dish dish) {
         if (dish.getQuantity()>0) {dish.setStock(true);}
         return dishRepository.save(dish);}
