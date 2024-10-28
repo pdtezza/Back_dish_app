@@ -91,6 +91,7 @@ public class PedidoService {
         for (Dish x: pedido.getDish()){
             if (idPrato == x.getId()) {
                 pedido.getDish().remove(x);
+                pedido.setPrecoTotal(pedido.getPrecoTotal() - x.getPrice());
                 break;
             }
         }
