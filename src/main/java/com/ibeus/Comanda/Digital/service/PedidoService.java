@@ -84,4 +84,16 @@ public class PedidoService {
 
         return pedidoRepository.save(pedido);
     }
+
+    public Pedido deletarItem(Long id, Long idPrato){
+        Pedido pedido = findById(id);
+
+        for (Dish x: pedido.getDish()){
+            if (idPrato == x.getId()) {
+                pedido.getDish().remove(x);
+                break;
+            }
+        }
+        return pedidoRepository.save(pedido);
+    }
 }

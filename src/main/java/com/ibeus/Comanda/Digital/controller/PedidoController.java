@@ -27,6 +27,9 @@ public class PedidoController {
     @PutMapping("/{id}/adicionarItemPedido")
     public Pedido adicionarItem(@PathVariable Long id, @RequestBody Pedido detalhesPedido){ return pedidoService.update(id, detalhesPedido); }
 
+    @PutMapping("/{id}/{idPrato}/apagarItemPedido")
+    public Pedido deletItem(@PathVariable Long id, @PathVariable Long idPrato){ return pedidoService.deletarItem(id, idPrato); }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> apagarPedido(@PathVariable Long id) {
         pedidoService.delete(id);
