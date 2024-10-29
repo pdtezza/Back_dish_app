@@ -47,6 +47,19 @@ public class ClienteService {
     
         return detalhesPedido.toString();
     }
+    public void finalizarUltimoPedido(Cliente clienteInfo) {
+        // Busca o último pedido sem cliente associado
+        Pedido pedido = pedidoRepository.findTopByClienteIsNullOrderByIdDesc()
+                .orElseThrow(() -> new RuntimeException("Nenhum pedido pendente encontrado"));
+
+        // Verifica se o cliente já existe com base no CPF
+        Cliente cliente = clienteRepository.findByCpf(clienteInfo.getCpf())
+                .orElseGet(() -> clienteRepository.save(clienteInfo));
+
+        // Associa o cliente ao pedido e salva
+        pedido.setCliente(cliente);
+        pedidoRepository.save(pedido);
+    }
 
 
  }

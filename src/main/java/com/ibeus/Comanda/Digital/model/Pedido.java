@@ -20,6 +20,10 @@ public class Pedido {
     private String status;
 
     private String data;
+    @OneToOne
+    @JoinColumn(name="cliente_id",
+    referencedColumnName = "id")
+    private Cliente cliente;
 
     @ManyToMany
     @JoinTable(
