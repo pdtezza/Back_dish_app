@@ -5,7 +5,6 @@ import com.ibeus.Comanda.Digital.model.Pedido;
 import com.ibeus.Comanda.Digital.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +21,14 @@ public class PedidoController {
     @GetMapping
     public List<Pedido> getAllPedidos(){ return pedidoService.findAll();}
 
-   @PostMapping
-    public ResponseEntity<Pedido> criarPedido(@RequestBody Pedido pedido, @RequestParam Long clienteId) {
-        Pedido novoPedido = pedidoService.criarPedido(pedido, clienteId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
-    }
-
+    @PostMapping
+    public Pedido criarPedido(@RequestBody Pedido pedido){ return pedidoService.criarPedido(pedido);}
 
     @PutMapping("/{id}/adicionarItemPedido")
     public Pedido adicionarItem(@PathVariable Long id, @RequestBody Pedido detalhesPedido){ return pedidoService.update(id, detalhesPedido); }
+
+    @PutMapping("/{id}/{idPrato}/apagarItemPedido")
+    public Pedido deletItem(@PathVariable Long id, @PathVariable Long idPrato){ return pedidoService.deletarItem(id, idPrato); }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> apagarPedido(@PathVariable Long id) {

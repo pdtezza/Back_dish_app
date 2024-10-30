@@ -1,15 +1,12 @@
 package com.ibeus.Comanda.Digital.service;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ibeus.Comanda.Digital.model.Cliente;
 import com.ibeus.Comanda.Digital.model.Dish;
 import com.ibeus.Comanda.Digital.model.Pedido;
-import com.ibeus.Comanda.Digital.repository.ClienteRepository;
 import com.ibeus.Comanda.Digital.repository.DishRepository;
 import com.ibeus.Comanda.Digital.repository.PedidoRepository;
 
@@ -21,8 +18,6 @@ public class PedidoService {
 
     @Autowired
     private DishRepository dishRepository;
-    @Autowired
-    private ClienteRepository clienteRepository;
 
     // @Autowired
     // private ItemPedidoRepository itemPedidoRepository;
@@ -39,18 +34,9 @@ public class PedidoService {
         return dishRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
     }
 
-    public Pedido criarPedido(Pedido pedido, Long clienteId) {
-        
-        Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-
-        
-        pedido.setCliente(cliente); 
-
-        
+    public Pedido criarPedido(Pedido pedido){
         return pedidoRepository.save(pedido);
     }
-
 
     public void delete(Long id) {
         Pedido pedido = findById(id);
@@ -99,5 +85,16 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
-    
+    public Pedido deletarItem(Long id, Long idPrato){
+        Pedido pedido = findById(id);
+
+        for (Dish x: pedido.getDish()){
+            if (idPrato == x.getId()) {
+                pedido.getDish().remove(x);
+                pedido.setPrecoTotal(pedido.getPrecoTotal() - x.getPrice());
+                break;
+            }
+        }
+        return pedidoRepository.save(pedido);
+    }
 }

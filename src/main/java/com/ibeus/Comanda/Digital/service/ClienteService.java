@@ -47,13 +47,19 @@ public class ClienteService {
     
         return detalhesPedido.toString();
     }
-    public List<Pedido> listarPedidosPorCliente(Long idCliente) {
-        Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        
-        return cliente.getPedidos(); 
+    public void finalizarUltimoPedido(Cliente clienteInfo) {
+        // Busca o último pedido sem cliente associado
+        Pedido pedido = pedidoRepository.findTopByClienteIsNullOrderByIdDesc()
+                .orElseThrow(() -> new RuntimeException("Nenhum pedido pendente encontrado"));
+
+        // Verifica se o cliente já existe com base no CPF
+        Cliente cliente = clienteRepository.findByCpf(clienteInfo.getCpf())
+                .orElseGet(() -> clienteRepository.save(clienteInfo));
+
+        // Associa o cliente ao pedido e salva
+        pedido.setCliente(cliente);
+        pedidoRepository.save(pedido);
     }
-    
 
 
  }

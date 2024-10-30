@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibeus.Comanda.Digital.model.Cliente;
-import com.ibeus.Comanda.Digital.model.Pedido;
 import com.ibeus.Comanda.Digital.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
     @Autowired
-    private ClienteService clienteService; 
-    
+    private ClienteService clienteService;      
    
     @PostMapping
     public Cliente criarCliente(@RequestBody Cliente cliente) {
@@ -37,12 +35,26 @@ public class ClienteController {
     public String acompanharPedido(@PathVariable Long pedidoId) {
         return clienteService.acompanharPedido(pedidoId);
     }
+    // @PutMapping("/avancar-status/{pedidoId}")
+    // public String avancarStatusPedido(@PathVariable Long pedidoId) {
+    //     return clienteService.avancarStatusPedido(pedidoId);
+    // }
 
-      @GetMapping("/{idCliente}/pedidos")
-    public ResponseEntity<List<Pedido>> listarPedidosPorCliente(@PathVariable Long idCliente) {
-        List<Pedido> pedidos = clienteService.listarPedidosPorCliente(idCliente);
-        return ResponseEntity.ok(pedidos);
+    
+    // @PutMapping("/retroceder-status/{pedidoId}")
+    // public String retrocederStatusPedido(@PathVariable Long pedidoId) {
+    //     return clienteService.retrocederStatusPedido(pedidoId);
+    // }
+    @PostMapping("/finalizarPedido")
+    public ResponseEntity<String> finalizarPedido(@RequestBody Cliente clienteInfo) {
+        try {
+            clienteService.finalizarUltimoPedido(clienteInfo);
+            return ResponseEntity.ok("Pedido finalizado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao finalizar pedido: " + e.getMessage());
+        }
     }
+
 
    
 }
