@@ -1,7 +1,10 @@
 package com.ibeus.Comanda.Digital.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ibeus.Comanda.Digital.model.Cliente;
+import com.ibeus.Comanda.Digital.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class PedidoService {
     @Autowired
     private DishRepository dishRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
     // @Autowired
     // private ItemPedidoRepository itemPedidoRepository;
 
@@ -73,15 +78,29 @@ public class PedidoService {
 
         return pedidoRepository.save(pedido);
 }*/
+    public Pedido addItem(Long id, Long idPrato){
+        Pedido pedido = findById(id);
+        Dish dish = findByIdDish(idPrato);
+        List<Dish> listaItens = pedido.getDish();
+        listaItens.add(dish);
+        pedido.setDish(listaItens);
+        pedido.setPrecoTotal(pedido.getPrecoTotal()+dish.getPrice());
+
+        return pedidoRepository.save(pedido);
+    }
+
     public Pedido update(Long id, Pedido detalhesPedido) {
         Pedido pedido = findById(id);
-        pedido.setDish(detalhesPedido.getDish());
         pedido.setStatus(detalhesPedido.getStatus());
+        pedido.setCliente(detalhesPedido.getCliente());
+        pedido.setDish(detalhesPedido.getDish());
 
-        for (Dish x: pedido.getDish()){
-            pedido.setPrecoTotal(pedido.getPrecoTotal() + x.getPrice());
-        }
-
+/*        List<Dish> pratos = pedido.getDish();
+        if (pratos != null) {
+            for (Dish x : pratos) {
+                pedido.setPrecoTotal(pedido.getPrecoTotal() + x.getPrice());
+            }
+        }*/
         return pedidoRepository.save(pedido);
     }
 
@@ -96,5 +115,12 @@ public class PedidoService {
             }
         }
         return pedidoRepository.save(pedido);
+    }
+
+    public Pedido setObs(Long id, String obs){
+        Pedido pedido = findById(id);
+
+        pedido.setObservacao(obs);
+        return  pedidoRepository.save(pedido);
     }
 }
