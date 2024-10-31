@@ -24,6 +24,10 @@ public class Pedido {
     @JoinColumn(name="cliente_id",
     referencedColumnName = "id")
     private Cliente cliente;
+    
+    @ManyToOne
+    @JoinColumn(name = "motoboy_id")  // Define a chave estrangeira na tabela "pedidos"
+    private Motoboy motoboy;
 
     @ManyToMany
     @JoinTable(
