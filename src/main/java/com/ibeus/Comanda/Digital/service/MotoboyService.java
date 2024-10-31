@@ -30,18 +30,9 @@ public class MotoboyService {
         return motoboyRepository.findById(id);
     }
 
-    public void finalizarEntrega(Long idPedido, String cpfParcial) {
+    public void finalizarEntrega(Long idPedido) {
     Pedido pedido = pedidoRepository.findById(idPedido)
             .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
-
-    
-    String cpfCompleto = pedido.getCliente().getCpf();
-
-    
-    if (!cpfCompleto.substring(cpfCompleto.length() - 4).equals(cpfParcial)) {
-        throw new RuntimeException("Confirmação de entrega falhou: CPF incorreto.");
-    }
-
     
     pedido.setStatus("Entregue");
     pedidoRepository.save(pedido);
