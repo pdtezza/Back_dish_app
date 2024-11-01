@@ -43,7 +43,15 @@ public class GerenteService {
     public String avancarStatusPedido(Long pedidoId) {
         Pedido pedido = pedidoRepository.findById(pedidoId)
             .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
-
+    
+  
+        if (pedido.getStatus() == null) {
+            pedido.setStatus("Recebido");
+            pedidoRepository.save(pedido);
+            return "Status do pedido foi definido como: Recebido";
+        }
+    
+       
         switch (pedido.getStatus()) {
             case "Recebido" -> pedido.setStatus("Em andamento");
             case "Em andamento" -> pedido.setStatus("Saiu para entrega");
@@ -55,7 +63,8 @@ public class GerenteService {
                 return "Status do pedido inválido.";
             }
         }
-
+    
+        
         pedidoRepository.save(pedido);
         return "Status do pedido " + pedidoId + " atualizado para: " + pedido.getStatus();
     }

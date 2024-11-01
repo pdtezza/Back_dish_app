@@ -54,9 +54,8 @@ public class GerenteController {
         }
  
     }
-    @PostMapping("/atribuir-motoboy")
-    public ResponseEntity<Pedido> atribuirMotoboy(@RequestParam Long pedidoId, @RequestParam Long motoboyId) {
-    Pedido pedidoAtualizado = gerenteService.atribuirMotoboyAoPedido(pedidoId, motoboyId); 
-    return ResponseEntity.ok(pedidoAtualizado);
-}
+    @PutMapping("/atribuirMotoboy")
+    public Pedido atribuirMotoboyAoPedido(@RequestParam Long pedidoId, @RequestParam Long motoboyId) {
+        return gerenteService.atribuirMotoboyAoPedido(pedidoId, motoboyId);
+    }
 }

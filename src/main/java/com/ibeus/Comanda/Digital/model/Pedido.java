@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class Pedido {
     private Cliente cliente;
     
     @ManyToOne
-    @JoinColumn(name = "motoboy_id")  // Define a chave estrangeira na tabela "pedidos"
+    @JoinColumn(name = "motoboy_id")  
     private Motoboy motoboy;
 
     @ManyToMany
@@ -38,5 +39,7 @@ public class Pedido {
     private List<Dish> dish;
 
     private double precoTotal;
+
+    private String observacao;
 
 }
