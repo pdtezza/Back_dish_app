@@ -53,11 +53,11 @@ public class GerenteService {
     
        
         switch (pedido.getStatus()) {
-            case "Recebido" -> pedido.setStatus("Em andamento");
-            case "Em andamento" -> pedido.setStatus("Saiu para entrega");
-            case "Saiu para entrega" -> pedido.setStatus("Entregue");
-            case "Entregue" -> {
-                return "O pedido já foi entregue e não pode ser avançado.";
+            case "Recebido" -> pedido.setStatus("Pedido sendo preparado");
+            case "Pedido sendo preparado" -> pedido.setStatus("Pedido saiu para entrega");
+            
+            case "Saiu para entrega" -> {
+                return "O pedido ja esta no maximo que o Gerente pode alterar";
             }
             default -> {
                 return "Status do pedido inválido.";
@@ -74,9 +74,9 @@ public class GerenteService {
             .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 
         switch (pedido.getStatus()) {
-            case "Entregue" -> pedido.setStatus("Saiu para entrega");
-            case "Saiu para entrega" -> pedido.setStatus("Em andamento");
-            case "Em andamento" -> pedido.setStatus("Recebido");
+            case "Entregue" -> pedido.setStatus("Pedido saiu para entrega");
+            case "Pedido saiu para entrega" -> pedido.setStatus("Pedido sendo preparado");
+            case "Pedido sendo preparado" -> pedido.setStatus("Recebido");
             case "Recebido" -> {
                 return "O pedido está no status inicial e não pode ser retrocedido.";
             }
