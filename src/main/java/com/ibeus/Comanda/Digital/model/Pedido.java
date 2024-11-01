@@ -25,6 +25,10 @@ public class Pedido {
     @JoinColumn(name="cliente_id",
     referencedColumnName = "id")
     private Cliente cliente;
+    
+    @ManyToOne
+    @JoinColumn(name = "motoboy_id")  
+    private Motoboy motoboy;
 
     @ManyToMany
     @JoinTable(
