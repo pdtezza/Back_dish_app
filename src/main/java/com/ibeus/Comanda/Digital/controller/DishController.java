@@ -36,11 +36,16 @@ public class DishController {
         return dishService.update(id, dish);
     }
 
-    @PutMapping("/{id}/diminuirQuantidade")
-    public Dish diminuirQuantidadeDish(@PathVariable Long id, @RequestParam int value) {return dishService.diminuirQuantidade(id, value);}
+    @PutMapping("/{id}/atualizarEstoque")
+    public Dish atualizarStock(@PathVariable Long id, @RequestParam int valor) {
+        return dishService.atualizarStock(id, valor);
+    }
 
-    @PutMapping("/{id}/aumentarQuantidade")
-    public Dish aumentarQuantidadeDish(@PathVariable Long id, @RequestParam int value) {return dishService.aumentarQuantidade(id, value);}
+//    @PutMapping("/{id}/diminuirQuantidade")
+//    public Dish diminuirQuantidadeDish(@PathVariable Long id, @RequestParam int value) {return dishService.diminuirQuantidade(id, value);}
+//
+//    @PutMapping("/{id}/aumentarQuantidade")
+//    public Dish aumentarQuantidadeDish(@PathVariable Long id, @RequestParam int value) {return dishService.aumentarQuantidade(id, value);}
 
 
     @DeleteMapping("/{id}")

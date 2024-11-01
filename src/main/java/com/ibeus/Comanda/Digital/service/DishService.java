@@ -22,7 +22,8 @@ public class DishService {
     }
  
     public Dish create(Dish dish) {
-        if (dish.getQuantity()>0) {dish.setStock(true);}
+//        if (dish.getQuantity()>0) {dish.setStock(true);}
+        if (dish.getStock() < 0 || dish.getStock() >1) { throw new IllegalArgumentException("Invalido, use 1 para em estoque ou 0 para sem estoque");}
         return dishRepository.save(dish);}
 
     public Dish update(Long id, Dish dishDetails) {
@@ -31,10 +32,12 @@ public class DishService {
         dish.setDescription(dishDetails.getDescription());
         dish.setPrice(dishDetails.getPrice());
         dish.setCategory(dishDetails.getCategory());
-        dish.setQuantity(dishDetails.getQuantity());
-        if (dish.getQuantity()>0) {dish.setStock(true);}
-        if (dish.getQuantity()==0) {dish.setStock(false);}
-        if (dish.getQuantity()<0) { throw new RuntimeException("Quantidade insuficiente");}
+        if (dishDetails.getStock() < 0 || dishDetails.getStock() >1) { throw new IllegalArgumentException("Invalido, use 1 para em estoque ou 0 para sem estoque");}
+        dish.setStock(dishDetails.getStock());
+//        dish.setQuantity(dishDetails.getQuantity());
+//        if (dish.getQuantity()>0) {dish.setStock(true);}
+//        if (dish.getQuantity()==0) {dish.setStock(false);}
+//        if (dish.getQuantity()<0) { throw new RuntimeException("Quantidade insuficiente");}
         return dishRepository.save(dish);
     }
 
@@ -43,28 +46,35 @@ public class DishService {
         dishRepository.delete(dish);
     }
 
-    public Dish diminuirQuantidade(Long id, int valor) {
+    public Dish atualizarStock(Long id, int valor) {
         Dish dish = findById(id);
-        if (dish.getQuantity() - valor < 0) {
-            throw new RuntimeException("Quantidade insuficiente");
-        }
-        dish.setQuantity(dish.getQuantity() - valor);
-        if (dish.getQuantity() == 0) {
-            dish.setStock(false);
-        }
+        if (valor < 0 || valor >1) { throw new IllegalArgumentException("Invalido, use 1 para em estoque ou 0 para sem estoque");}
+        dish.setStock(valor);
         return dishRepository.save(dish);
     }
 
-    public Dish aumentarQuantidade(Long id, int valor) {
-        if (valor <= 0){
-            throw new RuntimeException("Quantidade inválida");
-        }
-        Dish dish = findById(id);
-        dish.setQuantity(dish.getQuantity() + valor);
-        if (dish.getQuantity() > 0) {
-            dish.setStock(true);
-        }
-        return dishRepository.save(dish);
-    }
+//    public Dish diminuirQuantidade(Long id, int valor) {
+//        Dish dish = findById(id);
+////        if (dish.getQuantity() - valor < 0) {
+////            throw new RuntimeException("Quantidade insuficiente");
+////        }
+////        dish.setQuantity(dish.getQuantity() - valor);
+////        if (dish.getQuantity() == 0) {
+////            dish.setStock(false);
+////        }
+//        return dishRepository.save(dish);
+//    }
+
+//    public Dish aumentarQuantidade(Long id, int valor) {
+//        if (valor <= 0){
+//            throw new RuntimeException("Quantidade inválida");
+//        }
+//        Dish dish = findById(id);
+//        dish.setQuantity(dish.getQuantity() + valor);
+//        if (dish.getQuantity() > 0) {
+//            dish.setStock(true);
+//        }
+//        return dishRepository.save(dish);
+//    }
 
 }
