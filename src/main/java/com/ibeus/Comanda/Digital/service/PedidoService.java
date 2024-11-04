@@ -95,12 +95,14 @@ public class PedidoService {
         pedido.setCliente(detalhesPedido.getCliente());
         pedido.setDish(detalhesPedido.getDish());
 
-/*        List<Dish> pratos = pedido.getDish();
+        List<Dish> pratos = pedido.getDish();
         if (pratos != null) {
             for (Dish x : pratos) {
                 pedido.setPrecoTotal(pedido.getPrecoTotal() + x.getPrice());
             }
-        }*/
+        }else{
+            pedido.setPrecoTotal(0);
+        }
         return pedidoRepository.save(pedido);
     }
 
