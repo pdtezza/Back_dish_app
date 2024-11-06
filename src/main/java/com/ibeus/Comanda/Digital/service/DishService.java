@@ -32,6 +32,7 @@ public class DishService {
         dish.setDescription(dishDetails.getDescription());
         dish.setPrice(dishDetails.getPrice());
         dish.setCategory(dishDetails.getCategory());
+        dish.setImage(dishDetails.getImage());
         if (dishDetails.getStock() < 0 || dishDetails.getStock() >1) { throw new IllegalArgumentException("Invalido, use 1 para em estoque ou 0 para sem estoque");}
         dish.setStock(dishDetails.getStock());
 //        dish.setQuantity(dishDetails.getQuantity());
@@ -51,6 +52,10 @@ public class DishService {
         if (valor < 0 || valor >1) { throw new IllegalArgumentException("Invalido, use 1 para em estoque ou 0 para sem estoque");}
         dish.setStock(valor);
         return dishRepository.save(dish);
+    }
+
+    public List<Dish> findByCategory(String category){
+        return dishRepository.findByCategory(category);
     }
 
 //    public Dish diminuirQuantidade(Long id, int valor) {

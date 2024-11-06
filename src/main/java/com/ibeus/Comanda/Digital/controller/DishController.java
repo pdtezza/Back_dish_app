@@ -26,6 +26,11 @@ public class DishController {
         return dishService.findById(id);
     }
 
+    @GetMapping("category/{category}")
+    public List<Dish> getDishesByCategory(@PathVariable String category) {
+        return dishService.findByCategory(category);
+    }
+
     @PostMapping
     public Dish createDish(@RequestBody Dish dish) {
         return dishService.create(dish);
