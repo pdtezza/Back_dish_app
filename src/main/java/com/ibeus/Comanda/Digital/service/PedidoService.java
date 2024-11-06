@@ -92,6 +92,7 @@ public class PedidoService {
     public Pedido update(Long id, Pedido detalhesPedido) {
         Pedido pedido = findById(id);
         pedido.setStatus(detalhesPedido.getStatus());
+        pedido.setData(detalhesPedido.getData());
         pedido.setCliente(detalhesPedido.getCliente());
         pedido.setDish(detalhesPedido.getDish());
 
